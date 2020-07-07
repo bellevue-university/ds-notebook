@@ -88,3 +88,9 @@ RUN julia -e 'import Pkg; Pkg.update()' && \
     fix-permissions "${JULIA_PKGDIR}" "${CONDA_DIR}/share/jupyter"
 
 WORKDIR $HOME
+
+# Install Tensorflow
+RUN pip install --quiet --no-cache-dir \
+    'tensorflow==2.2.0' && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
