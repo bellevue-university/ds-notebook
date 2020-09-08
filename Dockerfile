@@ -94,3 +94,11 @@ RUN pip install --quiet --no-cache-dir \
     'tensorflow==2.2.0' && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
+
+# Install s3fs
+RUN conda install --quiet --yes \
+    's3fs-0.2.2' \
+    && \
+    conda clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
