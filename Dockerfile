@@ -97,7 +97,7 @@ RUN pip install --quiet --no-cache-dir \
 
 # Install s3fs
 RUN conda install --quiet --yes \
-    's3fs==0.2.2' \
+    's3fs==0.5.0' \
     && \
     conda clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
