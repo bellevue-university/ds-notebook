@@ -110,3 +110,22 @@ RUN conda install --quiet --yes \
     conda clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
+
+# Install schema and data packages
+RUN conda install --quiet --yes \
+    'snappy==1.1.8' \
+    'fastavro==0.23.5' \
+    'fastparquet==0.4.1' \
+    'pygeohash==1.2.0' \
+    && \
+    conda clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
+# Install jsonschema
+RUN conda install --quiet --yes \
+    'jsonschema==3.2.0' \
+    && \
+    conda clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
