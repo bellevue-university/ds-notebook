@@ -138,14 +138,6 @@ RUN conda install --quiet --yes \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Install python snappy
-RUN conda install --quiet --yes \
-    'python-snappy==0.5.4' \
-    && \
-    conda clean --all -f -y && \
-    fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "/home/${NB_USER}"
-
 # Install beautifulsoup4, chardet, and dateutil
 RUN conda install --quiet --yes \
     'beautifulsoup4==4.9.1' \
