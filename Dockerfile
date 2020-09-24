@@ -178,7 +178,11 @@ RUN curl https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.
     curl https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.7.5/snappy-java-1.1.7.5.jar \
     --output $SPARK_HOME/jars/snappy-java-1.1.7.5.jar && \
     curl https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar \
-    --output $SPARK_HOME/jars/slf4j-api-1.7.30.jar
+    --output $SPARK_HOME/jars/slf4j-api-1.7.30.jar && \
+    curl https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.2.0/hadoop-aws-3.2.0.jar \
+    --output $SPARK_HOME/jars/hadoop-aws-3.2.0.jar && \
+    curl https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.11.375/aws-java-sdk-bundle-1.11.375.jar \
+    --output $SPARK_HOME/jars/aws-java-sdk-bundle-1.11.375.jar
 
 USER $NB_UID
 WORKDIR $HOME
