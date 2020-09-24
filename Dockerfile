@@ -157,14 +157,28 @@ RUN apt-get update && \
 
 USER $NB_UID
 
-# Fetch Spark Kafka Jars
-RUN spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.1 \
-    /usr/local/spark/examples/src/main/python/pi.py
-
 # Move Jars to the Spark library
 USER root
+WORKDIR /tmp
 
-RUN cd "/home/${NB_USER}/.ivy2/jars" && \
-    mv *.jar $SPARK_HOME/jars/
+RUN curl https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.0.1/spark-sql-kafka-0-10_2.12-3.0.1.jar \
+    --output $SPARK_HOME/jars/spark-sql-kafka-0-10_2.12-3.0.1.jar && \
+    curl https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.0.1/spark-token-provider-kafka-0-10_2.12-3.0.1.jar \
+    --output $SPARK_HOME/jars/spark-token-provider-kafka-0-10_2.12-3.0.1.jar && \
+    curl https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/2.4.1/kafka-clients-2.4.1.jar \
+    --output $SPARK_HOME/jars/kafka-clients-2.4.1.jar && \
+    curl https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.6.2/commons-pool2-2.6.2.jar \
+    --output $SPARK_HOME/jars/commons-pool2-2.6.2.jar && \
+    curl https://repo1.maven.org/maven2/org/spark-project/spark/unused/1.0.0/unused-1.0.0.jar \
+    --output $SPARK_HOME/jars/unused-1.0.0.jar && \
+    curl https://repo1.maven.org/maven2/com/github/luben/zstd-jni/1.4.4-3/zstd-jni-1.4.4-3.jar \
+    --output $SPARK_HOME/jars/zstd-jni-1.4.4-3.jar && \
+    curl https://repo1.maven.org/maven2/org/lz4/lz4-java/1.7.1/lz4-java-1.7.1.jar \
+    --output $SPARK_HOME/jars/lz4-java-1.7.1.jar && \
+    curl https://repo1.maven.org/maven2/org/xerial/snappy/snappy-java/1.1.7.5/snappy-java-1.1.7.5.jar \
+    --output $SPARK_HOME/jars/snappy-java-1.1.7.5.jar && \
+    curl https://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar \
+    --output $SPARK_HOME/jars/slf4j-api-1.7.30.jar
 
 USER $NB_UID
+WORKDIR $HOME
