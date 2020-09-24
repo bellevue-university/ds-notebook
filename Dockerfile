@@ -147,3 +147,24 @@ RUN conda install --quiet --yes \
     conda clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
+
+USER root
+
+# SSH Client for Git
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    openssh-client
+
+USER $NB_UID
+
+# Fetch Spark Kafka Jars
+RUN spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.0.1 \
+    /usr/local/spark/examples/src/main/python/pi.py
+
+# Move Jars to the Spark library
+USER root
+
+RUN cd "/home/${NB_USER}/.ivy2/jars" && \
+    mv *.jar $SPARK_HOME/jars/
+
+USER $NB_UID
