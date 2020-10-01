@@ -186,3 +186,9 @@ RUN curl https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.
 
 USER $NB_UID
 WORKDIR $HOME
+
+# Install Keras
+RUN pip install --quiet --no-cache-dir \
+    'keras==2.4.3' && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
