@@ -192,3 +192,14 @@ RUN pip install --quiet --no-cache-dir \
     'keras==2.4.3' && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
+
+# Install pygal
+RUN conda install --quiet --yes \
+    'pygal==2.4.0' \
+    'cairosvg==2.4.2' \
+    'tinycss==0.4' \
+    'cssselect==1.1.0' \
+    && \
+    conda clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
