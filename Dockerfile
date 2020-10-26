@@ -203,3 +203,9 @@ RUN conda install --quiet --yes \
     conda clean --all -f -y && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
+
+# Install Kafka Python
+RUN pip install --quiet --no-cache-dir \
+    'kafka-python==2.0.2' && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
