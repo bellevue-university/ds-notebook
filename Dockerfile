@@ -209,3 +209,9 @@ RUN pip install --quiet --no-cache-dir \
     'kafka-python==2.0.2' && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
+
+# Install pydgraph
+RUN pip install --quiet --no-cache-dir \
+    'pydgraph==20.7.0' && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
