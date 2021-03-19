@@ -108,3 +108,11 @@ RUN curl https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.
 
 USER $NB_UID
 WORKDIR $HOME
+
+## Install pyspark
+RUN conda install --quiet --yes \
+    'pyspark==3.1.1' \
+    && \
+    conda clean --all -f -y && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
